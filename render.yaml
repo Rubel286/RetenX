@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: retenx
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
+    envVars:
+      - key: SECRET_KEY
+        value: "7d3f9e2c8a4b6g1h5j9k3m7n0p4q2r6s8"
+      - key: PORT
+        value: "5000"
+    disk:
+      name: retenx-disk
+      mountPath: "/opt/render/project/src/uploads"
+      sizeGB: 0.5

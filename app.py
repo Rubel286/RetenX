@@ -478,8 +478,4 @@ def health_check():
 
 if __name__ == '__main__':
     get_model('rf')  # Preload Random Forest model
-<<<<<<< HEAD
     app.run(host='0.0.0.0', port=int(os.getenv("PORT", 5000)), debug=False)
-=======
-    app.run(host='0.0.0.0', port=int(os.getenv("PORT", 5000)), debug=False)
->>>>>>> f87c521 (updated app.py and additional files for render)

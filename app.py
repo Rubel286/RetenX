@@ -10,13 +10,21 @@ import plotly.express as px
 import plotly.io as pio
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-import threading
+import glob
 
 app = Flask(__name__)
-app.secret_key = os.getenv("SECRET_KEY", "supersecretkey")
-UPLOAD_FOLDER = 'uploads'
+app.secret_key = os.getenv("SECRET_KEY", "supersecretkey")  # Use env var with fallback
+if os.getenv("RENDER", "false").lower() == "true":
+    UPLOAD_FOLDER = '/opt/render/project/src/uploads'
+else:
+    UPLOAD_FOLDER = 'uploads'  # Local fallback
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+MAX_FILES = 10
+uploaded_files = glob.glob(os.path.join(UPLOAD_FOLDER, "*.csv"))
+if len(uploaded_files) > MAX_FILES:
+    for file in uploaded_files[:-MAX_FILES]:
+        os.remove(file)
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -470,4 +478,8 @@ def health_check():
 
 if __name__ == '__main__':
     get_model('rf')  # Preload Random Forest model
+<<<<<<< HEAD
     app.run(host='0.0.0.0', port=int(os.getenv("PORT", 5000)), debug=False)
+=======
+    app.run(host='0.0.0.0', port=int(os.getenv("PORT", 5000)), debug=False)
+>>>>>>> f87c521 (updated app.py and additional files for render)

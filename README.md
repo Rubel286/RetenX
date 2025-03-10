@@ -68,6 +68,9 @@ python app.py
 Then, open http://127.0.0.1:5000/ in your browser.
 
 Live Demo
+
 🚀 RetenX is deployed at:
+
 🔗 https://retenx.onrender.com
+
 💡 Note: The free-tier server may take a few seconds to start due to cold starts.
